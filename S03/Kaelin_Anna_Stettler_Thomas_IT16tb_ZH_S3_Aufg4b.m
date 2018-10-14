@@ -10,7 +10,9 @@ for i=1:length(r)
 end
 
 % Berechnung des Integrals
-m = Kaelin_Anna_Stettler_Thomas_IT16tb_ZH_S3_Aufg4a(r,y);
+%m = Kaelin_Anna_Stettler_Thomas_IT16tb_ZH_S3_Aufg4a(r,y);
+%m = Kaelin_Anna_Stettler_Thomas_IT16tb_ZH_S3_Aufg4a(r,y);
+
 m_lit = 5.9722*10^24;
 
 f_abs = abs(m-m_lit);

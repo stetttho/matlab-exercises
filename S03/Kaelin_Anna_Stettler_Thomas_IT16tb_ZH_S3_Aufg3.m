@@ -17,7 +17,8 @@ end
 % Romberg Extrapolation
 for k=1:kmax
     for i=0:kmax-k
-        Tf(i+1,k+1)=((4^k)*Tf(i+2,k)-Tf(i+1,k))/((4^k)+1);
+        Tf(i+1,k+1)=((4^k)*Tf(i+2,k)-Tf(i+1,k))/((4^k)-1);
     end
 end
-T=Tf(1,m);
+%T=Tf(1,m);
+T=Tf;
