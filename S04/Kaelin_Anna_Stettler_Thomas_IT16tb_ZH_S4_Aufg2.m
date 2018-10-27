@@ -1,4 +1,5 @@
 % Gegebene Funktionen
+R = 50;
 V = @(t) 3500 .* sin(140.*pi.*t).*exp(-63.*pi.*t);
 f = @(t) (V(t).^2)./R;
 
@@ -6,7 +7,7 @@ f = @(t) (V(t).^2)./R;
 % Schrittweite n=3 ist zu klein und führt zu einer fehlerhaften
 % Romberg-Extrapolation. Deshalb wird n=7 gewählt, womit sich E beim Wert
 % 250 stabilisiert.
-R = 50;
+
 n = 7;
 E = zeros(1,R);
 
@@ -19,7 +20,7 @@ plot(E);
 
 % 2b
 h0 = 0.01;
-m = 3;
+m = 7;
 x0 = 0.01;
 E_calc = @(i) Kaelin_Anna_Stettler_Thomas_IT16tb_ZH_S3_Aufg3(f,0,i,m);
 g = (@(t) E_calc(t)-250);
