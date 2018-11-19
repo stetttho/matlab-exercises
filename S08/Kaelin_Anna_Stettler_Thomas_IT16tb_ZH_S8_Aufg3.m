@@ -10,41 +10,59 @@ h = 0.1;
 n = (b-a)/h;
 [x,y_euler,y_mittelpunkt, ~] = Kaelin_Anna_Stettler_Thomas_IT16tb_ZH_S5_Aufg3(f , a, b, n, y0);
 
+subplot(2,1,1);
+hold off
+plot(x, y_exakt(x));
+hold on
+plot(x, y_euler);
+plot(x, y_mittelpunkt);
+
 % Aufgabe b)
-tol = 0.1;
-hk(1) = 0.1;
+tol = 0.0001;
+hk(1) = h;
 xk(1) = a;
 k = 1;
 y_euler_adaptiv(1) = y0;
 y_mittelpunkt_adaptiv(1) = y0;
 
 while xk(k) < b
+    xk(k+1) = xk(k) + hk(k); 
+
     [~,y_eul,~,~] = Kaelin_Anna_Stettler_Thomas_IT16tb_ZH_S5_Aufg3(f , xk(k), xk(k)+hk(k), 1, y_euler_adaptiv(k));   
     [~,~,y_mitp,~] = Kaelin_Anna_Stettler_Thomas_IT16tb_ZH_S5_Aufg3(f , xk(k), xk(k)+hk(k), 1, y_mittelpunkt_adaptiv(k));
     y_euler_adaptiv(k+1) = y_eul(2);
     y_mittelpunkt_adaptiv(k+1) = y_mitp(2);
     
     if abs(y_euler_adaptiv(k+1)-y_mittelpunkt_adaptiv(k+1)) < tol/20
-        xk(k+1) = xk(k) + hk(k);
         hk(k+1) = hk(k)*2;
-        k = k + 1;        
+        k = k + 1;
     elseif abs(y_euler_adaptiv(k+1)-y_mittelpunkt_adaptiv(k+1)) >= tol
-        hk(k) = hk(k)/2;   
+        hk(k) = hk(k)/2; 
     else
-         xk(k+1) = xk(k) + hk(k);
-         hk(k+1) = hk(k);
-         k = k + 1;      
-    end
-      
+        hk(k+1) = hk(k);
+        k = k + 1;
+    end     
 end
 
 % Aufgabe c)
-subplot(2,1,1);
-plot(x, y_exakt(x), xk, y_euler_adaptiv, xk, y_mittelpunkt_adaptiv);
+
+plot(xk, y_mittelpunkt_adaptiv);
 title("Vergleich exakte und geschätzte Lösungen");
+legend('Exakt', 'Euler-Fix', 'Mittelpunkt-Fix', 'Mittelpunkt variables h');
+hold off
+
 subplot(2,1,2);
 plot(xk, hk);
 title("Schrittweite in Abhängigkeit der Zeit t");
+
+
+
+%% Aufgabe d)
+% tol: kleinere Toleranz führt zu kleinerer minimaler Schrittweite 
+% bei grosser steigung. Kleine Werte von tol lassen h spät steigen.
+% Je kleiner tol, desto länger dauert die Berechnung der Resultate
+% massiv.
+% h : Bei abflachender Funktionskurve wird h grösser ansonsten kleiner
 
 
 
