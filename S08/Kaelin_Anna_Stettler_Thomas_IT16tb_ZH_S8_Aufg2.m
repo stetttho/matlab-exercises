@@ -24,7 +24,7 @@ plot(x,y(1,:));
 % y(a) = y0 auf dem Intervall [a,b] mit n
 
 % beispielaufruf:
-% [x,y] = Kaelin_Anna_Stettler_Thomas_IT16tb_ZH_S6_Aufg1(@(x,y) x.^2 + 0.1.*y , -1.5, 1.5, 5, 0)
+[x,y] = Kaelin_Anna_Stettler_Thomas_IT16tb_ZH_S6_Aufg1(@(x,y) x.^2 + 0.1.*y , -1.5, 1.5, 5, 0)
 
 function [x,y] = Kaelin_Anna_Stettler_Thomas_IT16tb_ZH_S6_Aufg1(f , a, b, n, y0)
 x = zeros(1,n+1);

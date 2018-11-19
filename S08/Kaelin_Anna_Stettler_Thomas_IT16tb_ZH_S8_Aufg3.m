@@ -18,7 +18,7 @@ plot(x, y_euler);
 plot(x, y_mittelpunkt);
 
 % Aufgabe b)
-tol = 0.0001;
+tol = 0.1;
 hk(1) = h;
 xk(1) = a;
 k = 1;
