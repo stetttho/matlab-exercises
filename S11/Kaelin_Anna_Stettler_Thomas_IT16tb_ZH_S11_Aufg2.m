@@ -58,9 +58,34 @@ koeffizienten = linsolve(ATA, ATy);
 
 % Plotten der gegebenen Werte und der erhaltenen Ausgleichsfunktion
 p = koeffizienten(1).*data(:,1) + koeffizienten(2).*data(:,2) + koeffizienten(3).*data(:,3) + koeffizienten(4).*data(:,4);
+subplot(2,1,1);
 plot(x, p, x, y, 'o');
 legend('Datenpunkte','Ausgleichsfunktion');
 xlabel('Zeiteinheit');
 ylabel('mCH');
 
+% Aufgabe b)
+max = 1000;
+maxff = zeros(1,10);
+minff = zeros(1,10);
+for dmch=1:10
+    minff(dmch) = realmax;
+    for n = 1:max
+        yGest = y + (y*dmch/100) .* sign(-0.5 + rand(size(y)));
+        lambda = (A'*A)\(A'*yGest);
+        EGest = norm(y-A*lambda,2)^2;
+        if (EGest < minff(dmch))
+           minff(dmch) = EGest;
+        end
+        if (EGest > maxff(dmch))
+           maxff(dmch)= EGest; 
+        end
+    end
+end
+
+subplot(2,1,2);
+plot(1:10, maxff, 1:10, minff);
+legend('maximales Fehlerfunktional', 'minimales Fehlerfunktional');
+xlabel('Fehlerkategorie');
+ylabel('Fehlerfunktional');
 
